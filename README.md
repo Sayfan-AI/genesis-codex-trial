@@ -2,6 +2,26 @@
 
 Build a small static web page that converts temperatures between Celsius, Fahrenheit and Kelvin as the user types, with unit tests for the conversion logic, deployed to GitHub Pages. Small and finished beats large and partial: keep the roadmap to one milestone.
 
+## Conversion logic
+
+Requires Node.js 22 or newer. There are no package dependencies to install.
+
+```bash
+npm test
+```
+
+`src/temperature.js` exports `convertTemperature(input, unit)`. The unit is
+`celsius`, `fahrenheit`, or `kelvin`; input is a number or decimal string.
+The result has a `status` of `empty`, `error` (with a `message`), or `success`
+(with numeric `values` for all three units). Results aren't rounded; the page
+can format them without losing precision during later conversions. Empty input
+has no values, and invalid, non-finite, below-absolute-zero, or overflowing input
+returns an error with no values.
+
+The `CI` workflow runs these tests on pull requests and pushes to `main`.
+The live page, browser checks, and Pages deployment are the remaining tasks in
+the approved Milestone 1 plan (issue #2).
+
 ## Setup
 
 This dev system runs on **OpenAI Codex** in local mode. Start it from a clone of this repo with `genesis serve`. The engine comes from `[engine]` in `.genesis/config.toml`, and the `codex` CLI has to be installed and logged in (`codex login`). Local mode needs no GitHub Actions secrets, only the Genesis App values in `~/.config/genesis/.env`, so the system's work is attributed to the App rather than to you.
