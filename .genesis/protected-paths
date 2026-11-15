@@ -1,0 +1,17 @@
+# Paths an autonomous pull request can't land on its own.
+#
+# The merge sweep (genesis serve) and genesis-merge.yml read this file from the
+# default branch, never from the pull request. A bot pull request that touches
+# any of these stays open with `needs:human` and a comment naming the file.
+#
+# One prefix per line. A prefix covers itself and everything beneath it.
+
+# Agent definitions and Claude Code settings. Codex can write here; Claude Code
+# can't, which is why a Claude dev system doesn't need this line.
+.claude/
+
+# The hooks Codex sessions run under, including host-guard.sh's wiring.
+.codex/
+
+# This list.
+.genesis/protected-paths
