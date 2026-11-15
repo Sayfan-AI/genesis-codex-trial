@@ -38,9 +38,46 @@ npm run test:e2e
 ```
 
 The checks cover all input directions, clearing, validation and recovery,
-keyboard focus order, and responsive bounds. The `CI` workflow currently runs
-unit tests on PRs and main. Complete CI integration and Pages deployment remain
-in issue #5 of the approved Milestone 1 plan (issue #2).
+keyboard focus order, and responsive bounds. Browser checks build the production
+artifact and serve it at `/genesis-codex-trial/`, matching the deployed subpath.
+
+## Production build and deployment
+
+Live site: https://sayfan-ai.github.io/genesis-codex-trial/
+
+```bash
+npm ci
+npm test
+npm run check:workflows
+npm run build
+npm run test:e2e
+```
+
+`npm run build` copies only the four browser assets into `dist/`. Relative asset
+URLs support the GitHub Pages repository subpath without a bundler. To preview:
+
+```bash
+STATIC_DIR=dist BASE_PATH=/genesis-codex-trial/ npm run dev
+```
+
+Open http://127.0.0.1:4173/genesis-codex-trial/.
+
+The workflow named `CI` runs unit tests, workflow turn-budget validation, the
+production build, and desktop/mobile Chromium checks on PRs and main. Only a
+successful main-branch build uploads its tested `dist/` artifact and deploys it
+with the built-in `GITHUB_TOKEN` (`pages: write` and `id-token: write`). Pages
+must use **GitHub Actions** as its publishing source. PRs never deploy.
+
+Run the same browser checks against the published site:
+
+```bash
+LIVE_URL=https://sayfan-ai.github.io/genesis-codex-trial/ npm run test:e2e
+```
+
+The deterministic workflow check parses every workflow, including disabled
+ones, and requires explicit positive `--max-turns` values for Claude actions or
+shell invocations. The four orchestrator-class workflows require at least 30.
+Its unit tests cover missing, invalid, and undersized budgets.
 
 ## Setup
 
