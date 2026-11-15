@@ -4,7 +4,7 @@ Build a small static web page that converts temperatures between Celsius, Fahren
 
 ## Conversion logic
 
-Requires Node.js 22 or newer. There are no package dependencies to install.
+Requires Node.js 22 or newer. The page has no runtime dependencies.
 
 ```bash
 npm test
@@ -18,9 +18,29 @@ can format them without losing precision during later conversions. Empty input
 has no values, and invalid, non-finite, below-absolute-zero, or overflowing input
 returns an error with no values.
 
-The `CI` workflow runs these tests on pull requests and pushes to `main`.
-The live page, browser checks, and Pages deployment are the remaining tasks in
-the approved Milestone 1 plan (issue #2).
+## Live converter page
+
+```bash
+npm run dev
+```
+
+Open http://127.0.0.1:4173. Type in any of the three labeled fields to convert
+immediately. The field you're editing keeps your exact input; the other fields
+show up to 8 significant digits. Clearing a field clears the results. Invalid
+or below-absolute-zero input shows an accessible message and clears other values.
+
+Run the Chromium checks at desktop and mobile sizes:
+
+```bash
+npm ci
+npx playwright install chromium
+npm run test:e2e
+```
+
+The checks cover all input directions, clearing, validation and recovery,
+keyboard focus order, and responsive bounds. The `CI` workflow currently runs
+unit tests on PRs and main. Complete CI integration and Pages deployment remain
+in issue #5 of the approved Milestone 1 plan (issue #2).
 
 ## Setup
 

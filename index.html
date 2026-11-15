@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#173e37">
+    <title>Temperature converter</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">CELSIUS · FAHRENHEIT · KELVIN</p>
+        <h1>Degrees, made simple.</h1>
+        <p class="intro" id="instructions">Type a temperature in any field. The other two update as you go.</p>
+      </header>
+      <section class="converter" aria-label="Temperature converter" aria-describedby="instructions">
+        <div class="fields">
+          <div class="field">
+            <label for="celsius">Celsius <span>°C</span></label>
+            <input id="celsius" name="celsius" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—" aria-describedby="limits feedback">
+            <p>Water freezes at 0 °C</p>
+          </div>
+          <div class="field">
+            <label for="fahrenheit">Fahrenheit <span>°F</span></label>
+            <input id="fahrenheit" name="fahrenheit" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—" aria-describedby="limits feedback">
+            <p>Water freezes at 32 °F</p>
+          </div>
+          <div class="field">
+            <label for="kelvin">Kelvin <span>K</span></label>
+            <input id="kelvin" name="kelvin" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="—" aria-describedby="limits feedback">
+            <p>Water freezes at 273.15 K</p>
+          </div>
+        </div>
+        <p id="feedback" role="status" aria-live="polite" aria-atomic="true">Enter a temperature to get started.</p>
+      </section>
+      <p class="note" id="limits">The lower limit is absolute zero: −273.15 °C / −459.67 °F / 0 K. Converted values are rounded to 8 significant digits.</p>
+      <noscript><p>Enable JavaScript to use the live converter.</p></noscript>
+    </main>
+    <footer>A little clarity, whatever the scale.</footer>
+  </body>
+</html>
